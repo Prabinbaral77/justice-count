@@ -19,6 +19,7 @@ export interface Case {
     };
     comments: Comment[];
     priority: boolean;
+    isFeatured: boolean;
     status: 'pending' | 'approved' | 'rejected';
 }
 
@@ -39,6 +40,7 @@ export const initialCases: Case[] = [
             { id: 'c1', text: 'We will never forget.', author: 'Citizen', createdAt: new Date().toISOString() }
         ],
         priority: true,
+        isFeatured: false,
         status: 'approved'
     },
     {
@@ -55,6 +57,7 @@ export const initialCases: Case[] = [
         },
         comments: [],
         priority: true,
+        isFeatured: true,
         status: 'approved'
     }
 ];

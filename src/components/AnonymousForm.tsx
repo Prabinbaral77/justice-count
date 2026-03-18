@@ -25,6 +25,7 @@ export default function AnonymousForm() {
             votes: { served: 0, denied: 0 },
             comments: [],
             priority: false,
+            isFeatured: false,
             status: 'pending',
         };
 

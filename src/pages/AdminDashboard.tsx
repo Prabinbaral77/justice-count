@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAppContext } from '../App';
 import type { Case } from '../data/mockData';
-import { ShieldAlert, CheckCircle, XCircle, Star, StarOff, Eye } from 'lucide-react';
+import { ShieldAlert, CheckCircle, XCircle, Star, StarOff, Eye, Flame } from 'lucide-react';
 
 export default function AdminDashboard() {
     const { cases } = useAppContext();
@@ -14,6 +14,10 @@ export default function AdminDashboard() {
 
     const handlePriority = (id: string) => {
         setLocalCases(prev => prev.map(c => c.id === id ? { ...c, priority: !c.priority } : c));
+    };
+
+    const handleFeatured = (id: string) => {
+        setLocalCases(prev => prev.map(c => c.id === id ? { ...c, isFeatured: !c.isFeatured } : c));
     };
 
     const stats = {
@@ -91,6 +95,7 @@ export default function AdminDashboard() {
                             <tr key={c.id} className="hover:bg-slate-800/20 transition-colors">
                                 <td className="px-6 py-4">
                                     <div className="flex items-center gap-2">
+                                        {c.isFeatured && <Flame className="w-3.5 h-3.5 text-red-500 fill-red-500 shrink-0" />}
                                         {c.priority && <Star className="w-3 h-3 text-amber-400 shrink-0" />}
                                         <span className="font-medium text-white truncate max-w-[180px]">{c.title}</span>
                                     </div>
@@ -135,6 +140,13 @@ export default function AdminDashboard() {
                                             className="p-1.5 text-slate-500 hover:text-red-400 disabled:opacity-30 rounded-lg hover:bg-red-500/10 transition-colors"
                                         >
                                             <XCircle className="w-4 h-4" />
+                                        </button>
+                                        <button
+                                            onClick={() => handleFeatured(c.id)}
+                                            title="Toggle Featured"
+                                            className={`p-1.5 rounded-lg transition-colors ${c.isFeatured ? 'text-red-500 bg-red-500/10' : 'text-slate-500 hover:text-red-500 hover:bg-slate-700'}`}
+                                        >
+                                            <Flame className="w-4 h-4" />
                                         </button>
                                     </div>
                                 </td>

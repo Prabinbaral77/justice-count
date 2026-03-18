@@ -12,7 +12,8 @@ export default function Home() {
 
     const approvedCases = cases.filter(c => c.status === 'approved');
 
-    const featured = approvedCases.find(c => c.priority) ?? approvedCases[1];
+    const featured = approvedCases.find(c => c.isFeatured) ?? approvedCases[0];
+
 
     const filtered = useMemo(() => {
         return approvedCases.filter(c => {
