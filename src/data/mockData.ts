@@ -26,10 +26,10 @@ export interface Case {
 export const initialCases: Case[] = [
     {
         id: 'case-1',
-        title: 'Nirmala Panta Murder Case',
-        victimName: 'Nirmala Panta',
-        startDate: '2018-07-26T00:00:00Z',
-        description: 'The deeply disturbing case of a 13-year-old girl whose tragic death remains unresolved, sparking nationwide protests for justice.',
+        title: 'निर्मला पन्त बलात्कार तथा हत्या प्रकरण',
+        victimName: 'निर्मला पन्त',
+        startDate: '2018-07-27T00:00:00Z',
+        description: '१३ वर्षकी नर्मलाको आवाज आज पनि प्रतिक्षामै छ, सत्य अन्धकारमै हराइरहेको छ, एक निर्दोष जीवन गुम्यो, तर दोषी अझै स्वतन्त्र छन्, र देशभरि एउटै प्रश्न गुञ्जिरहेको छ—हामीले अझै कति दिन कुर्नु पर्ने?',
         tagline: 'न्याय त मरिसक्यो रे आमा',
         imageUrl: '/victims/nirmala.png',
         votes: {
@@ -45,10 +45,10 @@ export const initialCases: Case[] = [
     },
     {
         id: 'case-2',
-        title: 'Ganga Maya Adhikari Struggle',
-        victimName: 'Krishna Prasad Adhikari',
-        startDate: '2004-06-06T00:00:00Z',
-        description: 'The tireless hunger strike of a mother demanding justice for her son murdered during the conflict era.',
+        title: 'इनिशा बिक बलात्कार तथा हत्या प्रकरण',
+        victimName: 'इनिशा बिक',
+        startDate: '2026-03-07T00:00:00Z',
+        description: '१६ वर्षकी इनिशा बिकको चिच्याहटले देश नै हल्लियो, तर न्याय अझै मौन छ—कति छोरीहरू अझै गुम्नुपर्छ तब मात्र कानुन जाग्ने हो? अपराधीहरू नडराउनुको कारण नै सजायको डर नहुनु हो, र यही मौनताले उनीहरूलाई झन् बल दिइरहेको छ; अब कुनै बहाना होइन, कुनै दया होइन—निर्दयीका लागि कडा न्याय चाहिन्छ, किनकि प्रत्येक ढिलाइले अर्को निर्दोष जीवन जोखिममा पारिरहेको छ।',
         tagline: 'सास रहुन्जेल आश',
         imageUrl: '/victims/Inisha.png',
         votes: {
