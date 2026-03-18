@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import type { Case } from '../data/mockData';
 import VoteBar from './VoteBar';
 import CommentSection from './CommentSection';
+import BloodFrame from './BloodFrame';
 import { ChevronDown, ChevronUp, Star } from 'lucide-react';
 
 interface CaseCardProps {
@@ -23,53 +24,7 @@ function useDays(startDate: string) {
     return days;
 }
 
-// ─── Symbolic Visual Overlay ───────────────────────────────────────────────
-function VisualAestheticsOverlay() {
-    return (
-        <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-            {/* Dark desaturated tone reinforcement */}
-            <div className="absolute inset-0 bg-black/20" />
 
-            {/* Subtle Red Overlay Gradient (Anger/Injustice) */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-red-900/40 via-transparent to-transparent opacity-60" />
-
-            {/* Spotlight Lighting (Centered on Face area) */}
-            <div
-                className="absolute inset-0"
-                style={{
-                    background: 'radial-gradient(circle at 50% 35%, transparent 10%, rgba(0,0,0,0.6) 70%)'
-                }}
-            />
-
-            {/* Abstract Red Streaks (Pain/Injustice) */}
-            <svg className="absolute inset-0 w-full h-full opacity-20" preserveAspectRatio="none">
-                <line x1="10%" y1="-10%" x2="40%" y2="110%" stroke="currentColor" className="text-red-600" strokeWidth="0.5" transform="rotate(-5)" />
-                <line x1="60%" y1="-20%" x2="80%" y2="120%" stroke="currentColor" className="text-red-700" strokeWidth="1" transform="rotate(10)" />
-                <line x1="-5%" y1="40%" x2="105%" y2="60%" stroke="currentColor" className="text-red-800" strokeWidth="0.5" />
-            </svg>
-
-            {/* Symbolic Broken Justice Scale (Bottom Right) */}
-            <div className="absolute bottom-6 right-6 opacity-15 text-white group-hover:opacity-25 transition-opacity duration-700">
-                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                    {/* The Scale Base (Cracked) */}
-                    <path d="M12 3v17" />
-                    <path d="M12 20h7" />
-                    <path d="M12 20H5" />
-                    {/* The Beam (Broken/Tilted) */}
-                    <path d="M3 7l9-2 9 4" strokeDasharray="0.5 2" /> {/* Crack line */}
-                    <path d="M3 7l9-2 9 4" />
-                    {/* Left Plate (Low/Heavy) */}
-                    <path d="M6 7v4" />
-                    <path d="M3 11h6a3 3 0 0 1-6 0z" />
-                    {/* Right Plate (High/Empty/Broken) */}
-                    <path d="M18 9v2" />
-                    <path d="M16 11h4" />
-                    <circle cx="18" cy="14" r="1" /> {/* Falling piece */}
-                </svg>
-            </div>
-        </div>
-    );
-}
 
 // ─── Featured (wide hero) card ──────────────────────────────────────────────
 function FeaturedCard({ caseData }: { caseData: Case }) {
@@ -102,21 +57,18 @@ function FeaturedCard({ caseData }: { caseData: Case }) {
                 {/* ── Image column ── */}
                 <div className="relative md:w-5/12 h-80 md:h-auto md:min-h-[520px] shrink-0 overflow-hidden bg-black">
                     {caseData.imageUrl ? (
-                        <img
+                        <BloodFrame
                             src={caseData.imageUrl}
                             alt={caseData.victimName}
-                            className="w-full h-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-110"
-                            style={{ filter: 'grayscale(100%) contrast(1.2) brightness(0.8)' }}
+                            intensity="heavy"
+                            className="w-full h-full"
                         />
                     ) : (
                         <div className="w-full h-full bg-slate-900 flex items-center justify-center text-7xl">⚖️</div>
                     )}
 
-                    {/* Aesthetics Overlay */}
-                    <VisualAestheticsOverlay />
-
                     {/* Fading Gradients */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-[#0a0a0a]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-[#0a0a0a] pointer-events-none z-40" />
                 </div>
 
                 {/* ── Content column ── */}
@@ -222,23 +174,20 @@ function RegularCard({ caseData }: { caseData: Case }) {
             {/* Photo Section */}
             <div className="relative h-72 overflow-hidden bg-black">
                 {caseData.imageUrl ? (
-                    <img
+                    <BloodFrame
                         src={caseData.imageUrl}
                         alt={caseData.victimName}
-                        className="w-full h-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-110"
-                        style={{ filter: 'grayscale(100%) contrast(1.2) brightness(0.8)' }}
+                        intensity="medium"
+                        className="w-full h-full"
                     />
                 ) : (
                     <div className="w-full h-full bg-slate-900 flex items-center justify-center text-6xl">⚖️</div>
                 )}
 
-                {/* Visual Overlay */}
-                <VisualAestheticsOverlay />
-
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent z-40 pointer-events-none" />
 
                 {/* Red title banner at bottom of photo */}
-                <div className="absolute bottom-0 left-0 right-0 px-5 py-3 text-center z-20" style={{ background: '#c0000edd' }}>
+                <div className="absolute bottom-0 left-0 right-0 px-5 py-3 text-center z-50 pointer-events-none" style={{ background: '#c0000edd' }}>
                     <h3
                         className="font-extrabold text-white text-lg leading-tight"
                         style={{ fontFamily: '"Noto Serif Devanagari", serif' }}
