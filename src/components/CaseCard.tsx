@@ -24,7 +24,40 @@ function useDays(startDate: string) {
     return days;
 }
 
+// ─── Eye-catching Red Title Banner ──────────────────────────────────────────
+function TitleBanner({ title, size = 'large' }: { title: string; size?: 'small' | 'large' }) {
+    const isLarge = size === 'large';
+    return (
+        <div className={`relative inline-block ${isLarge ? 'mb-6' : 'mb-3'} group/title`}>
+            {/* Background Layers for Depth */}
+            <div
+                className="absolute inset-0 bg-red-950/40 translate-x-1 translate-y-1 rounded-sm blur-[1px]"
+                style={{ clipPath: 'polygon(2% 10%, 98% 0%, 100% 90%, 0% 100%)' }}
+            />
 
+            {/* The Main Red Banner with Brush Edges */}
+            <div
+                className={`relative px-6 py-2.5 text-white font-black tracking-wider transition-transform duration-500 group-hover/title:scale-[1.02]`}
+                style={{
+                    background: 'linear-gradient(135deg, #c0000e 0%, #991b1b 100%)',
+                    fontFamily: '"Noto Serif Devanagari", serif',
+                    fontSize: isLarge ? 'clamp(1.2rem, 3vw, 1.8rem)' : '1.1rem',
+                    clipPath: 'polygon(1% 15%, 97% 5%, 99% 85%, 2% 95%)',
+                    boxShadow: '0 10px 25px -5px rgba(153, 27, 27, 0.4)'
+                }}
+            >
+                {title}
+
+                {/* Highlight line */}
+                <div className="absolute top-1 left-[5%] right-[10%] h-[1px] bg-white/20" />
+            </div>
+
+            {/* Decorative Splatter Dots */}
+            <div className="absolute -top-2 -right-2 w-4 h-4 bg-red-600 rounded-full blur-[2px] opacity-40 mix-blend-screen" />
+            <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-red-800 rounded-full blur-[1px] opacity-60" />
+        </div>
+    );
+}
 
 // ─── Featured (wide hero) card ──────────────────────────────────────────────
 function FeaturedCard({ caseData }: { caseData: Case }) {
@@ -73,14 +106,9 @@ function FeaturedCard({ caseData }: { caseData: Case }) {
 
                 {/* ── Content column ── */}
                 <div className="flex-1 flex flex-col justify-between p-6 md:p-8 gap-6 z-20">
-                    {/* Title banner */}
+                    {/* Title Section */}
                     <div>
-                        <div
-                            className="inline-block px-5 py-2.5 mb-5 text-white font-extrabold tracking-wide rounded-lg shadow-lg shadow-red-900/20"
-                            style={{ background: '#c0000e', fontFamily: '"Noto Serif Devanagari", serif', fontSize: 'clamp(1.1rem, 3vw, 1.6rem)' }}
-                        >
-                            {caseData.title}
-                        </div>
+                        <TitleBanner title={caseData.title} size="large" />
 
                         {/* Day counter lines */}
                         <div className="space-y-2">
@@ -187,13 +215,8 @@ function RegularCard({ caseData }: { caseData: Case }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent z-40 pointer-events-none" />
 
                 {/* Red title banner at bottom of photo */}
-                <div className="absolute bottom-0 left-0 right-0 px-5 py-3 text-center z-50 pointer-events-none" style={{ background: '#c0000edd' }}>
-                    <h3
-                        className="font-extrabold text-white text-lg leading-tight"
-                        style={{ fontFamily: '"Noto Serif Devanagari", serif' }}
-                    >
-                        {caseData.title}
-                    </h3>
+                <div className="absolute bottom-4 left-0 right-0 px-4 text-center z-50 pointer-events-none flex justify-center">
+                    <TitleBanner title={caseData.title} size="small" />
                 </div>
             </div>
 
