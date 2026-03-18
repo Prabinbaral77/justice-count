@@ -18,12 +18,13 @@ export default function BloodFrame({ src, alt, intensity = 'medium', className =
     }[intensity];
 
     return (
-        <div className={`relative overflow-hidden group bg-black rounded-lg ${className}`}>
+        <div className={`relative overflow-hidden group bg-black rounded-lg select-none ${className}`}>
             {/* The Base Image */}
             <img
                 src={src}
                 alt={alt}
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                draggable="false"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 pointer-events-none"
                 style={{ filter: 'grayscale(100%) contrast(1.2) brightness(0.7)' }}
             />
 
