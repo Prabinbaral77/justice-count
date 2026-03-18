@@ -15,16 +15,14 @@ export default function ProtestBanner({
 }: ProtestBannerProps) {
     const isLarge = size === 'lg';
 
-    // Irregular "Hand-Painted" edge using a complex polygon
-    // This simulates a rough, organic brush stroke better than a simple skew
-    const clipPath = "polygon(1% 12%, 3% 5%, 8% 8%, 15% 2%, 25% 6%, 40% 1%, 55% 5%, 75% 0%, 88% 7%, 97% 3%, 99% 15%, 98% 40%, 100% 65%, 98% 88%, 95% 95%, 82% 92%, 65% 98%, 45% 94%, 30% 99%, 15% 95%, 5% 98%, 1% 85%, 2% 55%, 0% 30%)";
+    // Simplified polygon for much better paint performance
+    const clipPath = "polygon(2% 15%, 15% 5%, 85% 2%, 98% 12%, 97% 85%, 85% 95%, 15% 98%, 2% 88%)";
 
     return (
         <div
             className={`relative inline-block ${className} group/banner select-none transition-transform duration-300`}
             style={{
                 transform: `rotate(${isLarge ? -0.8 : 0.6}deg)`,
-                filter: 'drop-shadow(0 10px 15px rgba(127, 29, 29, 0.4))',
                 willChange: 'transform'
             }}
         >

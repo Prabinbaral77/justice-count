@@ -59,5 +59,24 @@ export const initialCases: Case[] = [
         priority: true,
         isFeatured: true,
         status: 'approved'
-    }
+    },
+    {
+        id: 'case-3',
+        title: 'Nirmala Panta Murder Case',
+        victimName: 'Nirmala Panta',
+        startDate: '2018-07-26T00:00:00Z',
+        description: 'The deeply disturbing case of a 13-year-old girl whose tragic death remains unresolved, sparking nationwide protests for justice.',
+        tagline: 'न्याय त मरिसक्यो रे आमा',
+        imageUrl: '/victims/nirmala.png',
+        votes: {
+            served: 5,
+            denied: 18453,
+        },
+        comments: [
+            { id: 'c1', text: 'We will never forget.', author: 'Citizen', createdAt: new Date().toISOString() }
+        ],
+        priority: true,
+        isFeatured: false,
+        status: 'approved'
+    },
 ];

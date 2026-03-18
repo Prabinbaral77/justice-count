@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import type { Case } from '../data/mockData';
 import VoteBar from './VoteBar';
 import CommentSection from './CommentSection';
@@ -26,7 +26,7 @@ function useDays(startDate: string) {
 }
 
 // ─── Featured (wide hero) card ──────────────────────────────────────────────
-function FeaturedCard({ caseData }: { caseData: Case }) {
+const FeaturedCard = memo(({ caseData }: { caseData: Case }) => {
     const [expanded, setExpanded] = useState(false);
     const days = useDays(caseData.startDate);
 
@@ -112,7 +112,7 @@ function FeaturedCard({ caseData }: { caseData: Case }) {
                         >
                             {expanded
                                 ? <><ChevronUp className="w-4 h-4" /> Hide Details</>
-                                : <><ChevronDown className="w-4 h-4" /> Show Votes &amp; Reactions</>
+                                : <><ChevronDown className="w-4 h-4" /> Show Votes & Reactions</>
                             }
                         </button>
 
@@ -136,10 +136,10 @@ function FeaturedCard({ caseData }: { caseData: Case }) {
             `}</style>
         </article>
     );
-}
+});
 
 // ─── Regular (grid) card ─────────────────────────────────────────────────────
-function RegularCard({ caseData }: { caseData: Case }) {
+const RegularCard = memo(({ caseData }: { caseData: Case }) => {
     const [expanded, setExpanded] = useState(false);
     const days = useDays(caseData.startDate);
 
@@ -216,7 +216,7 @@ function RegularCard({ caseData }: { caseData: Case }) {
                 >
                     {expanded
                         ? <><ChevronUp className="w-3.5 h-3.5" /> Hide</>
-                        : <><ChevronDown className="w-3.5 h-3.5" /> Votes &amp; Reactions</>
+                        : <><ChevronDown className="w-3.5 h-3.5" /> Votes & Reactions</>
                     }
                 </button>
 
@@ -230,11 +230,13 @@ function RegularCard({ caseData }: { caseData: Case }) {
             </div>
         </article>
     );
-}
+});
 
 // ─── Export ──────────────────────────────────────────────────────────────────
-export default function CaseCard({ caseData, featured = false }: CaseCardProps) {
+const CaseCard = memo(({ caseData, featured = false }: CaseCardProps) => {
     return featured
         ? <FeaturedCard caseData={caseData} />
         : <RegularCard caseData={caseData} />;
-}
+});
+
+export default CaseCard;
