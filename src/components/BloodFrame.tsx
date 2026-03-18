@@ -12,20 +12,20 @@ interface BloodFrameProps {
 export default function BloodFrame({ src, alt, intensity = 'medium', className = '' }: BloodFrameProps) {
     // Map intensity to opacity/quantity values
     const config = {
-        light: { opacity: 0.3, dots: 3, drips: 2 },
-        medium: { opacity: 0.6, dots: 6, drips: 4 },
-        heavy: { opacity: 0.9, dots: 10, drips: 8 },
+        light: { opacity: 0.3, dots: 2, drips: 1 },
+        medium: { opacity: 0.5, dots: 4, drips: 2 },
+        heavy: { opacity: 0.8, dots: 8, drips: 4 },
     }[intensity];
 
     return (
-        <div className={`relative overflow-hidden group bg-black rounded-lg select-none ${className}`}>
+        <div className={`relative overflow-hidden group bg-black rounded-lg select-none ${className}`} style={{ contain: 'paint' }}>
             {/* The Base Image */}
             <img
                 src={src}
                 alt={alt}
                 draggable="false"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 pointer-events-none"
-                style={{ filter: 'grayscale(100%) contrast(1.2) brightness(0.7)' }}
+                style={{ filter: 'grayscale(100%) contrast(1.2) brightness(0.7)', willChange: 'transform' }}
             />
 
             {/* Dark Vignette to focus center */}
@@ -46,7 +46,8 @@ export default function BloodFrame({ src, alt, intensity = 'medium', className =
                         radial-gradient(circle at 50% 100%, #b91c1c 0%, transparent 20%),
                         radial-gradient(circle at 0% 50%, #991b1b 0%, transparent 15%)
                     `,
-                    filter: 'blur(2px)'
+                    filter: 'blur(3px)',
+                    willChange: 'opacity'
                 }}
             />
 
@@ -55,33 +56,28 @@ export default function BloodFrame({ src, alt, intensity = 'medium', className =
                 {[...Array(config.drips)].map((_, i) => (
                     <div
                         key={i}
-                        className="w-[1.5px] bg-gradient-to-b from-red-900 via-red-700 to-transparent rounded-full animate-drip"
+                        className="w-[1.2px] bg-gradient-to-b from-red-900 via-red-700 to-transparent rounded-full animate-drip"
                         style={{
                             height: `${20 + Math.random() * 40}%`,
                             animationDelay: `${Math.random() * 5}s`,
                             animationDuration: `${4 + Math.random() * 4}s`,
-                            marginLeft: `${Math.random() * 20}px`
+                            marginLeft: `${Math.random() * 20}px`,
+                            willChange: 'transform'
                         }}
                     />
                 ))}
             </div>
 
-            {/* 3. Detailed Corner Dots (SVG for sharpness/randomness) */}
+            {/* 3. Detailed Corner Dots (SVG - Filter removed for performance) */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30 z-30" preserveAspectRatio="none">
-                <defs>
-                    <filter id="blood-blur">
-                        <feGaussianBlur in="SourceGraphic" stdDeviation="0.8" />
-                    </filter>
-                </defs>
-                <g filter="url(#blood-blur)">
+                <g style={{ filter: 'blur(0.8px)' }}>
                     {[...Array(config.dots)].map((_, i) => (
                         <circle
                             key={i}
                             cx={`${Math.random() < 0.5 ? Math.random() * 15 : 85 + Math.random() * 15}%`}
                             cy={`${Math.random() < 0.5 ? Math.random() * 15 : 85 + Math.random() * 15}%`}
-                            r={1.5 + Math.random() * 4}
+                            r={1.2 + Math.random() * 3}
                             fill={i % 2 === 0 ? '#7f1d1d' : '#b91c1c'}
-                            className="transition-all duration-1000"
                         />
                     ))}
                 </g>

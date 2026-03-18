@@ -33,7 +33,7 @@ function FeaturedCard({ caseData }: { caseData: Case }) {
     return (
         <article
             className="group relative overflow-hidden rounded-2xl ring-1 ring-red-900/40 shadow-2xl shadow-red-950/40"
-            style={{ background: '#0a0a0a' }}
+            style={{ background: '#0a0a0a', contain: 'content' }}
         >
             {/* Priority badge */}
             {caseData.priority && (
@@ -147,7 +147,7 @@ function RegularCard({ caseData }: { caseData: Case }) {
         <article
             className="group relative overflow-hidden rounded-2xl ring-1 ring-white/5 shadow-xl shadow-black/40
                 transition-all duration-500 hover:ring-red-800/30 hover:shadow-2xl hover:shadow-red-950/30 hover:-translate-y-1 cursor-pointer"
-            style={{ background: '#0a0a0a' }}
+            style={{ background: '#0a0a0a', contain: 'content' }}
         >
             {/* Priority badge */}
             {caseData.priority && (

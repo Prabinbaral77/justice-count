@@ -21,10 +21,11 @@ export default function ProtestBanner({
 
     return (
         <div
-            className={`relative inline-block ${className} group/banner select-none`}
+            className={`relative inline-block ${className} group/banner select-none transition-transform duration-300`}
             style={{
                 transform: `rotate(${isLarge ? -0.8 : 0.6}deg)`,
-                filter: 'drop-shadow(0 10px 15px rgba(127, 29, 29, 0.4))'
+                filter: 'drop-shadow(0 10px 15px rgba(127, 29, 29, 0.4))',
+                willChange: 'transform'
             }}
         >
             {/* 1. Underlying Deep Shadow Layer (Paint Thickness) */}
@@ -50,13 +51,8 @@ export default function ProtestBanner({
                     fontSize: isLarge ? 'clamp(1.1rem, 2.5vw, 1.7rem)' : '1rem',
                 }}
             >
-                {/* 3. Paint Texture Overlay (Subtle) */}
-                <div
-                    className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none"
-                    style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3F%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-                    }}
-                />
+                {/* 3. Subtle Texture Highlights (Non-SVG replacement for performance) */}
+                <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/dark-leather.png')] pointer-events-none" />
 
                 {/* 4. Horizontal "Dry Brush" Highlight */}
                 <div className="absolute top-2 left-[10%] right-[10%] h-[1px] bg-white/20 blur-[0.5px]" />
