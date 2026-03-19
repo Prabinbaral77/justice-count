@@ -16,14 +16,16 @@ export default function Home() {
 
 
     const filtered = useMemo(() => {
-        return approvedCases.filter(c => {
-            const matchesSearch =
-                c.title.toLowerCase().includes(search.toLowerCase()) ||
-                c.victimName.toLowerCase().includes(search.toLowerCase()) ||
-                c.description.toLowerCase().includes(search.toLowerCase());
-            return matchesSearch;
-        });
-    }, [approvedCases, search, activeCategory]);
+        return approvedCases
+            .filter(c => c.id !== featured?.id) // Exclude featured case from the main list
+            .filter(c => {
+                const matchesSearch =
+                    c.title.toLowerCase().includes(search.toLowerCase()) ||
+                    c.victimName.toLowerCase().includes(search.toLowerCase()) ||
+                    c.description.toLowerCase().includes(search.toLowerCase());
+                return matchesSearch;
+            });
+    }, [approvedCases, search, activeCategory, featured?.id]);
 
     const trending = [...approvedCases]
         .sort((a, b) => (b.votes.denied + b.votes.served) - (a.votes.denied + a.votes.served))
